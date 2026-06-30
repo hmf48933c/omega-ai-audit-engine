@@ -1,3 +1,8 @@
+# COPYRIGHT © 2026 HARSHAD NAGINDAS MEHTA. ALL RIGHTS RESERVED.
+# This source code is protected under default copyright laws.
+# No permission is granted to use, copy, modify, or distribute this code.
+# Provided solely for evaluation purposes by the Department of the Treasury.
+
 import streamlit as st
 
 # Set up page configurations
