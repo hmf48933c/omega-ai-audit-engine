@@ -1,0 +1,27 @@
+# V2 Enterprise Architecture Containerization
+# Designed for Azure App Service / FedRAMP Compliance
+version: '3.8'
+
+services:
+  api-backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=production
+      - OCR_ENGINE=EasyOCR
+      - LOG_LEVEL=INFO
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+
+  web-frontend:
+    image: node:18-alpine
+    command: npm start
+    ports:
+      - "3000:3000"
+    environment:
+      - API_URL=http://api-backend:8000
+    depends_on:
+      - api-backend
