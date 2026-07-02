@@ -1,21 +1,14 @@
-# TTB Alcohol Label Verification Assistant - Prototype for Treasury Take-Home Assessment
+# TTB Alcohol Label Verification Assistant
 
-A prototype application designed to assist TTB Compliance Agents in verifying alcohol label requirements using Optical Character Recognition (OCR).
+A dual-track application repository designed to assist TTB Compliance Agents in verifying alcohol label requirements using Optical Character Recognition (OCR). 
 
-## Deployed Application
+## V1: Live Rapid Prototype (Streamlit)
+Built to immediately address stakeholder requests for batch uploads and simple UI, while utilizing local Tesseract OCR to comply with strict federal outbound firewall constraints.
 * **Live Prototype URL:** https://omega-ai-audit-engine-3zzrfffmhfswutzlqdjngk.streamlit.app/
 
-## Tech Stack & Architecture
-* **Frontend/UI:** Streamlit
-* **OCR Engine:** Tesseract OCR (`pytesseract`)
-* **Image Processing:** `Pillow`
-
-## Setup and Run Instructions (Local)
-1. Ensure system dependencies are installed (requires `tesseract-ocr` on the host machine).
-2. Install Python dependencies: `pip install -r requirements.txt`
-3. Run the application: `streamlit run app.py`
-
-## Approach, Tools, & Assumptions
-* **Approach:** Built a lightweight, fast web interface focusing on stakeholder requests: processing under 5 seconds, batch upload capabilities, and strict case-sensitive compliance checking.
-* **Tools Used:** Streamlit was chosen for rapid UI prototyping and native batch-upload handling. Tesseract OCR was selected for fast, local text extraction without relying on external cloud APIs (addressing stakeholder firewall concerns).
-* **Assumptions Made:** Assumes uploaded images are of sufficient quality and lighting for standard OCR extraction. The warning statement check assumes "GOVERNMENT WARNING" must be an exact, all-caps match to pass validation.
+## V2: Production Enterprise Architecture (Azure/Docker Ready)
+Located in this repository (`/backend` and `docker-compose.yml`), this represents the decoupled modernization blueprint for a fully funded deployment:
+* **Frontend:** React/TailwindCSS UI (Decoupled).
+* **Backend:** Asynchronous Python FastAPI (`backend/main.py`) for high-volume batch processing.
+* **Intelligent Comparison Engine:** Implements fuzzy matching (Levenshtein distance) for brand names to reduce false positives (e.g., "STONE'S THROW" vs "Stone's Throw"), while enforcing strict case-sensitive matching for the legal Government Warning.
+* **Security & Infrastructure:** Fully containerized via Docker for seamless deployment to Azure App Services (FedRAMP Authorized). Completely stateless processing with zero database retention to ensure strict federal compliance.
